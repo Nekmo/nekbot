@@ -1,8 +1,8 @@
 import os
-
 import click
 
 from nekbot.conf import settings as nekbot_settings
+from nekbot.core.server import get_service_class
 
 ENVIRONMENT_VARIABLE = "NEKBOT_SETTINGS_MODULE"
 
@@ -15,10 +15,10 @@ def cli(ctx, debug, settings):
     nekbot_settings.configure(settings)
     if debug is not None:
         nekbot_settings.set('DEBUG', debug)
-    ctx.obj['DEBUG'] = debug
 
 
 @cli.command()
 @click.pass_context
 def run(ctx):
-    pass
+    cls = get_service_class()
+    cls().run()

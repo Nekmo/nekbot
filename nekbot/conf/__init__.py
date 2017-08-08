@@ -1,6 +1,7 @@
 # coding=utf-8
+from importlib import import_module
+
 import six
-from nekbot.utils.modules import import_string
 from . import global_settings
 
 __author__ = 'nekmo'
@@ -15,7 +16,7 @@ class Settings(object):
         la configuración del usuario. Esta sobrescribirá la global
         """
         if isinstance(mod, six.string_types):
-            mod = import_string(mod)
+            mod = import_module(mod)
         self.write_conf(mod)
 
     def write_conf(self, settings_mod, prevent_override=False):

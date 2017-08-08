@@ -1,0 +1,5 @@
+
+
+
+class CommandHandlerMixin(object):
+    pass

@@ -1,0 +1,4 @@
+
+
+class BotBase(object):
+    pass

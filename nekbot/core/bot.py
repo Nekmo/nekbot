@@ -1,5 +1,0 @@
-
-
-
-class NekBot(object):
-    pass
