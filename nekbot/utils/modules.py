@@ -6,6 +6,7 @@ https://docs.djangoproject.com/en/1.11/_modules/django/utils/module_loading/#imp
 
 from importlib import import_module
 
+import inspect
 import six
 import sys
 
@@ -29,3 +30,17 @@ def import_string(dotted_path):
         msg = 'Module "%s" does not define a "%s" attribute/class' % (
             module_path, class_name)
         six.reraise(ImportError, ImportError(msg), sys.exc_info()[2])
+
+
+def get_instance_objects(mod, cls):
+    return filter(
+        lambda x: isinstance(x, cls),
+        map(lambda y: getattr(mod, y), dir(mod))
+    )
+
+
+def get_subclass_objects(mod, cls):
+    return filter(
+        lambda x: inspect.isclass(x) and issubclass(x, cls) and cls != x,
+        map(lambda y: getattr(mod, y), dir(mod))
+    )
