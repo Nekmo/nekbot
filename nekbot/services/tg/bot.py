@@ -45,13 +45,17 @@ class TelegramBot(BotBase):
             app.init()
 
     def execute_function_handler(self, fn):
+        is_msg_cls = False
         if inspect.isclass(fn) and issubclass(fn, MessageBase):
             # Apply Telegram Mixin Class
             fn = get_message_cls(fn)
+            is_msg_cls = True
         def wrapper(bot, update):
             # TODO:
-            msg_cls = parse_telegram_update(update)
-            return fn(bot, update)
+            message = parse_telegram_update(update)
+            instance = fn(bot, message)
+            if is_msg_cls:
+                instance.send()
         return wrapper
 
     def register_handler_stanza(self, handler_stanza):

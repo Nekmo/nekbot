@@ -8,14 +8,16 @@ def get_message_cls(msg_cls):
     :param msg_cls: 
     :return: 
     """
-    mixin_name = '{}Mixin'.format(msg_cls.__name__)
-    mixin = import_string('nekbot.services.tg.message.{}'.format(mixin_name))
+    mixin_class = msg_cls.mixin_class
+    mixin = import_string('nekbot.services.tg.message.{}'.format(mixin_class))
 
-    class Message(msg_cls, mixin):
+    class Message(mixin, msg_cls):
         pass
     return Message
+
 
 def parse_telegram_update(update):
     """Translate Telegram update to Nekmo class
     """
-    pass
+    # TODO:
+    return update
