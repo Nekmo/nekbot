@@ -2,8 +2,7 @@
 
 
 class MessageBaseMixin(object):
-    bot = None
-    message = None
+    def parse_update(self, update):
+        self.user = None
+        self.chat = None
 
-    def send(self):
-        raise NotImplementedError

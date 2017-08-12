@@ -4,8 +4,7 @@ from nekbot.message.base import MessageBase
 
 
 class TextMessage(MessageBase):
-    mixin_class = 'TextMessageMixin'
-
+    message_class = 'TextMessage'
     emoji_mode = True
     format_mode = True
     safe_html = False

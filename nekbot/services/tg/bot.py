@@ -52,8 +52,8 @@ class TelegramBot(BotBase):
             is_msg_cls = True
         def wrapper(bot, update):
             # TODO:
-            message = parse_telegram_update(update)
-            instance = fn(bot, message)
+            message = parse_telegram_update(self, update)
+            instance = fn(self, message)
             if is_msg_cls:
                 instance.send()
         return wrapper
